@@ -5,15 +5,14 @@ import { ProductCard } from "@/components/product-card"
 import { CategoryFilter } from "@/components/category-filter"
 import type { Product } from "@/types/product"
 
-export function ProductGrid() {
-  const [products, setProducts] = useState<Product[]>([])
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<string>("all")
-  const [loading, setLoading] = useState(true)
+interface ProductGridProps {
+  initialProducts: Product[]
+}
 
-  useEffect(() => {
-    fetchProducts()
-  }, [])
+export function ProductGrid({ initialProducts }: ProductGridProps) {
+  const [products] = useState<Product[]>(initialProducts)
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(initialProducts)
+  const [selectedCategory, setSelectedCategory] = useState<string>("all")
 
   useEffect(() => {
     if (selectedCategory === "all") {
@@ -23,24 +22,14 @@ export function ProductGrid() {
     }
   }, [selectedCategory, products])
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch("/api/products")
-      const data = await response.json()
-      setProducts(data)
-      setFilteredProducts(data)
-    } catch (error) {
-      console.error("Error fetching products:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  if (loading) {
+  if (products.length === 0) {
     return (
       <section id="productos" className="w-full py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center">Cargando productos...</div>
+          <div className="text-center py-12">
+            <p className="text-xl text-muted-foreground">No hay productos disponibles</p>
+            <p className="text-sm text-muted-foreground mt-2">Verifica tu conexión a MongoDB</p>
+          </div>
         </div>
       </section>
     )

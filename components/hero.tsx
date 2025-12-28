@@ -1,26 +1,20 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { InfiniteCarousel } from "./infinite-carousel"
 import type { Product } from "@/types/product"
 
-export function Hero() {
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([])
+interface HeroProps {
+  products: Product[]
+}
 
-  useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((products: Product[]) => {
-        const featured = products.filter((p) => p.featured)
-        setFeaturedProducts(featured.length > 0 ? featured : products.slice(0, 8))
-      })
-      .catch((error) => console.error("Error loading featured products:", error))
-  }, [])
+export function Hero({ products }: HeroProps) {
+  const featuredProducts = products.filter((p) => p.featured)
+  const displayProducts = featuredProducts.length > 0 ? featuredProducts : products.slice(0, 8)
 
   return (
     <section className="w-full py-12 md:py-20 lg:py-28 bg-muted relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
-        <InfiniteCarousel products={featuredProducts} />
+        <InfiniteCarousel products={displayProducts} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
