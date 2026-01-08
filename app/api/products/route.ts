@@ -1,31 +1,26 @@
 import { NextResponse } from "next/server"
-import { MongoClient } from "mongodb"
+import { getDatabase } from "@/lib/mongodb"
 
-// Configura tu conexión a MongoDB Atlas
-const MONGODB_URI = process.env.MONGODB_URI || "tu-connection-string-aqui"
-const MONGODB_DB = process.env.MONGODB_DB || "printstore"
-
-let cachedClient: MongoClient | null = null
-
-async function connectToDatabase() {
-  if (cachedClient) {
-    return cachedClient
-  }
-
-  const client = await MongoClient.connect(MONGODB_URI)
-  cachedClient = client
-  return client
-}
+// Revalidar cada 60 segundos para productos públicos
+export const revalidate = 60
 
 export async function GET() {
   try {
-    const client = await connectToDatabase()
-    const db = client.db(MONGODB_DB)
-    const products = await db.collection("products").find({}).toArray()
+    const db = await getDatabase()
+    const products = await db
+      .collection("products")
+      .find({})
+      .project({ passwordHash: 0 }) // Excluir campos sensibles si existieran
+      .toArray()
 
-    return NextResponse.json(products)
+    // Headers de caché para CDN de Vercel
+    return NextResponse.json(products, {
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120",
+      },
+    })
   } catch (error) {
-    console.error("[v0] Error fetching products:", error)
+    console.error("[API] Error fetching products:", error)
     return NextResponse.json({ error: "Error al cargar productos" }, { status: 500 })
   }
 }
@@ -33,8 +28,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const client = await connectToDatabase()
-    const db = client.db(MONGODB_DB)
+    const db = await getDatabase()
 
     const product = {
       ...body,
@@ -49,7 +43,7 @@ export async function POST(request: Request) {
       productId: result.insertedId,
     })
   } catch (error) {
-    console.error("[v0] Error creating product:", error)
+    console.error("[API] Error creating product:", error)
     return NextResponse.json({ error: "Error al crear producto" }, { status: 500 })
   }
 }

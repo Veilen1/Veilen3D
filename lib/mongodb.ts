@@ -5,8 +5,16 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI
-const dbName = process.env.MONGODB_DB || "printstore"
-const options = {}
+const dbName = process.env.MONGODB_DB || "veilen3d"
+
+// Opciones optimizadas para serverless (Vercel)
+const options = {
+  maxPoolSize: 10, // Máximo de conexiones en el pool
+  minPoolSize: 1,  // Mínimo de conexiones mantenidas
+  maxIdleTimeMS: 30000, // Cerrar conexiones inactivas después de 30s
+  serverSelectionTimeoutMS: 5000, // Timeout para selección de servidor
+  socketTimeoutMS: 45000, // Timeout de socket
+}
 
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
