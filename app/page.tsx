@@ -5,7 +5,8 @@ import { Footer } from "@/components/footer"
 import { getDatabase } from "@/lib/mongodb"
 import type { Product } from "@/types/product"
 
-export const dynamic = "force-dynamic"
+// ISR: Revalidar cada 60 segundos (mejor que force-dynamic)
+export const revalidate = 60
 
 async function getProducts(): Promise<Product[]> {
   try {
@@ -15,8 +16,12 @@ async function getProducts(): Promise<Product[]> {
     }
 
     const db = await getDatabase()
-    // Agregamos lean() si estuvieras usando Mongoose, pero con driver nativo toArray está bien.
-    const products = await db.collection("products").find({}).toArray()
+    const products = await db
+      .collection("products")
+      .find({})
+      .sort({ featured: -1, createdAt: -1 }) // Destacados primero, luego recientes
+      .limit(50) // Limitar para mejor performance
+      .toArray()
     
     console.log(`✅ Productos obtenidos: ${products.length}`)
 

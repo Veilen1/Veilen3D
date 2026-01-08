@@ -1,0 +1,118 @@
+[
+  {
+    "name": "Porta Dados ojo de dragón",
+    "description": "Caja organizadora con forma de ojo de dragón para guardar tus dados de RPG",
+    "price": 12000,
+    "compareAtPrice": 17000,
+    "category": "rpg",
+    "stock": 15,
+    "featured": true,
+    "images": [
+      "https://makerworld.bblmw.com/makerworld/model/USbff3283de00e1a/design/2024-11-01_37ff9023f6a17.png?x-oss-process=image/resize,w_400/format,webp",
+      "https://makerworld.bblmw.com/makerworld/model/USbff3283de00e1a/design/2024-11-01_6883d7625d3b1.jpg?x-oss-process=image/resize,w_400/format,webp"
+    ]
+  },
+  {
+    "name": "Set de Miniaturas goblins",
+    "description": "Pack de 3 miniaturas de goblins para tus partidas de D&D",
+    "price": 10000,
+    "compareAtPrice": 15000,
+    "category": "miniaturas",
+    "stock": 8,
+    "featured": true,
+    "images": [
+      "https://makerworld.bblmw.com/makerworld/model/USaf655d63451027/design/2025-02-21_260582c5df81e.jpg?x-oss-process=image/resize,w_400/format,webp",
+      "https://makerworld.bblmw.com/makerworld/model/USaf655d63451027/design/2025-02-21_72ae6d4e5e33e8.jpg?x-oss-process=image%2Fresize%2Cw_400%2Fformat%2Cwebp",
+      "https://makerworld.bblmw.com/makerworld/model/USaf655d63451027/design/2025-02-21_70eff9c139541.gif?x-oss-process=image/resize,w_1000/format,webp"
+    ]
+  },
+  {
+    "name": "Soporte para Cartas TCG",
+    "description": "Soporte elegante para exhibir tus cartas más valiosas",
+    "price": 1800,
+    "category": "tcg",
+    "stock": 20,
+    "featured": true,
+    "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Fichas de Vida D20",
+    "description": "Set de 10 fichas con forma de D20 para llevar cuenta de vida",
+    "price": 1200,
+    "compareAtPrice": 1500,
+    "category": "rpg",
+    "stock": 30,
+    "featured": true,
+    "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Miniatura Elfo Arquero",
+    "description": "Miniatura detallada de elfo con arco, perfecta para pintar",
+    "price": 900,
+    "category": "miniaturas",
+    "stock": 12,
+    "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Organizador de Deck TCG",
+    "description": "Caja para organizar hasta 100 cartas con separadores",
+    "price": 2200,
+    "category": "tcg",
+    "stock": 10,
+    "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Dragón articulado",
+    "description": "Figura articulada de un dragón para decoración o juegos de mesa",
+    "price": 15000,
+    "category": "adornos",
+    "stock": 5,
+    "featured": true,
+    "images": ["https://makerworld.bblmw.com/makerworld/model/US298af8211cf174/design/2025-12-24_f16687f23e846.png?x-oss-process=image/resize,w_400/format,webp"]
+  },
+  {
+    "name": "Torre de Dados D&D",
+    "description": "Torre para tirar dados con diseño de castillo medieval",
+    "price": 3200,
+    "category": "rpg",
+    "stock": 7,
+    "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Marcadores de Counters",
+    "description": "Set de 20 marcadores de counters para juegos de cartas",
+    "price": 800,
+    "category": "tcg",
+    "stock": 25,
+    "images": ["/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Miniatura de Escenario Ruinas",
+    "description": "Pieza de escenario con ruinas antiguas para tus batallas",
+    "price": 5500,
+    "category": "miniaturas",
+    "stock": 4,
+    "featured": true,
+    "images": [
+      "/placeholder.svg?height=400&width=400",
+      "/placeholder.svg?height=400&width=400",
+      "/placeholder.svg?height=400&width=400"
+    ]
+  },
+  {
+    "name": "Figura Decorativa Pokémon",
+    "description": "Figura decorativa de tu Pokémon favorito",
+    "price": 2800,
+    "category": "adornos",
+    "stock": 15,
+    "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
+  },
+  {
+    "name": "Porta Celular Geek",
+    "description": "Soporte para celular con diseño temático",
+    "price": 1500,
+    "category": "otros",
+    "stock": 18,
+    "images": ["/placeholder.svg?height=400&width=400"]
+  }
+]

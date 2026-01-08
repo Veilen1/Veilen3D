@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Badge } from "@/components/ui/badge"
 import { useCart } from "@/hooks/use-cart"
 import { CartSheet } from "@/components/cart-sheet"
+import { UserMenu } from "@/components/user-menu"
 import Link from "next/link"
 
 export function Header() {
@@ -47,6 +48,8 @@ export function Header() {
                 )}
               </Button>
             </CartSheet>
+
+            <UserMenu />
 
             <Sheet>
               <SheetTrigger asChild className="md:hidden">
