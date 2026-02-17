@@ -53,10 +53,11 @@ export function CartSheet({ children }: CartSheetProps) {
                 <div key={item._id} className="flex gap-4">
                   <div className="relative h-20 w-20 rounded-md overflow-hidden bg-muted flex-shrink-0">
                     <Image
-                      src={item.image || `/placeholder.svg?height=80&width=80&query=${encodeURIComponent(item.name)}`}
+                      src={item.images?.[0] || item.image || `/placeholder.svg?height=80&width=80&query=${encodeURIComponent(item.name)}`}
                       alt={item.name}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
 

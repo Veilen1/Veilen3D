@@ -51,6 +51,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Trash2, Shield, ShieldOff, Users, Package, Plus, Pencil } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { CATEGORIES } from "@/lib/categories"
 
 interface User {
   _id: string
@@ -72,14 +73,6 @@ interface Product {
   featured?: boolean
   createdAt: string
 }
-
-const CATEGORIES = [
-  { value: "tcg", label: "TCG" },
-  { value: "rpg", label: "RPG" },
-  { value: "miniaturas", label: "Miniaturas" },
-  { value: "adornos", label: "Adornos" },
-  { value: "otros", label: "Otros" },
-]
 
 export default function AdminPage() {
   const { user, isLoading: authLoading } = useAuth()
@@ -563,7 +556,7 @@ export default function AdminPage() {
                           </SelectTrigger>
                           <SelectContent>
                             {CATEGORIES.map((cat) => (
-                              <SelectItem key={cat.value} value={cat.value}>
+                              <SelectItem key={cat.id} value={cat.id}>
                                 {cat.label}
                               </SelectItem>
                             ))}
@@ -665,7 +658,7 @@ export default function AdminPage() {
                           <TableCell className="font-medium">{p.name}</TableCell>
                           <TableCell>
                             <Badge variant="outline">
-                              {CATEGORIES.find((c) => c.value === p.category)?.label || p.category}
+                              {CATEGORIES.find((c) => c.id === p.category)?.label || p.category}
                             </Badge>
                           </TableCell>
                           <TableCell>

@@ -1,10 +1,12 @@
+import type { CategoryId } from "@/lib/categories"
+
 export interface Product {
   _id: string
   name: string
   description: string
   price: number
   compareAtPrice?: number
-  category: "tcg" | "rpg" | "miniaturas" | "adornos" | "otros"
+  category: CategoryId
   images?: string[]
   image?: string // Mantener por compatibilidad
   featured?: boolean // Agregar flag para productos destacados

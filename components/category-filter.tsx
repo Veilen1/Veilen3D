@@ -1,25 +1,17 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { CATEGORIES_WITH_ALL } from "@/lib/categories"
 
 interface CategoryFilterProps {
   selectedCategory: string
   onCategoryChange: (category: string) => void
 }
 
-const categories = [
-  { id: "all", label: "Todos" },
-  { id: "tcg", label: "TCG" },
-  { id: "rpg", label: "Juegos de Rol" },
-  { id: "miniaturas", label: "Miniaturas" },
-  { id: "adornos", label: "Adornos" },
-  { id: "otros", label: "Otros" },
-]
-
 export function CategoryFilter({ selectedCategory, onCategoryChange }: CategoryFilterProps) {
   return (
     <div id="categorias" className="flex flex-wrap gap-1.5 sm:gap-2">
-      {categories.map((category) => (
+      {CATEGORIES_WITH_ALL.map((category) => (
         <Button
           key={category.id}
           variant={selectedCategory === category.id ? "default" : "outline"}

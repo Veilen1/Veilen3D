@@ -65,7 +65,7 @@
     "name": "Dragón articulado",
     "description": "Figura articulada de un dragón para decoración o juegos de mesa",
     "price": 15000,
-    "category": "adornos",
+    "category": "decoraciones",
     "stock": 5,
     "featured": true,
     "images": ["https://makerworld.bblmw.com/makerworld/model/US298af8211cf174/design/2025-12-24_f16687f23e846.png?x-oss-process=image/resize,w_400/format,webp"]
@@ -103,7 +103,7 @@
     "name": "Figura Decorativa Pokémon",
     "description": "Figura decorativa de tu Pokémon favorito",
     "price": 2800,
-    "category": "adornos",
+    "category": "decoraciones",
     "stock": 15,
     "images": ["/placeholder.svg?height=400&width=400", "/placeholder.svg?height=400&width=400"]
   },

@@ -8,6 +8,7 @@ import { useCart } from "@/hooks/use-cart"
 import type { Product } from "@/types/product"
 import { useToast } from "@/hooks/use-toast"
 import { ProductCarousel } from "@/components/product-carousel"
+import { getCategoryLabel } from "@/lib/categories"
 
 interface ProductCardProps {
   product: Product
@@ -36,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="overflow-hidden group hover:shadow-lg transition-shadow flex flex-col h-full">
       <div className="relative">
         <ProductCarousel images={productImages} productName={product.name} />
-        <Badge className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-secondary text-secondary-foreground z-10 text-xs">{product.category}</Badge>
+        <Badge className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-secondary text-secondary-foreground z-10 text-xs">{getCategoryLabel(product.category)}</Badge>
         {quantityInCart > 0 && (
           <Badge className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 bg-accent text-accent-foreground z-10 font-bold text-xs">
             {quantityInCart} en carrito
