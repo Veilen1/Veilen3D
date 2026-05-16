@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/use-auth"
 import { Header } from "@/components/header"
@@ -105,6 +105,8 @@ export default function AdminPage() {
     featured: false,
   })
   const [savingProduct, setSavingProduct] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [uploadingImages, setUploadingImages] = useState(false)
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -312,6 +314,36 @@ export default function AdminPage() {
       setSavingProduct(false)
     }
   }
+
+    const uploadImageFiles = async (files: FileList | null) => {
+      if (!files || files.length === 0) return
+      setUploadingImages(true)
+      try {
+        const fd = new FormData()
+        Array.from(files).forEach((f) => fd.append("images", f))
+
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: fd,
+        })
+
+        const data = await res.json()
+
+        if (res.ok) {
+          const existing = productForm.images ? productForm.images.split(",").map((s) => s.trim()).filter(Boolean) : []
+          const newImgs = [...existing, ...data.urls]
+          setProductForm({ ...productForm, images: newImgs.join(", ") })
+          toast({ title: "Imágenes subidas" })
+        } else {
+          toast({ title: "Error", description: data.error || "Error subiendo imágenes", variant: "destructive" })
+        }
+      } catch (err) {
+        toast({ title: "Error", description: "Error de conexión", variant: "destructive" })
+      } finally {
+        setUploadingImages(false)
+        if (fileInputRef.current) fileInputRef.current.value = ""
+      }
+    }
 
   const deleteProduct = async (productId: string) => {
     try {
@@ -604,13 +636,39 @@ export default function AdminPage() {
                         <Label htmlFor="prod-featured">Producto destacado</Label>
                       </div>
                       <div className="col-span-2 space-y-2">
-                        <Label htmlFor="prod-images">URLs de imágenes (separadas por coma)</Label>
+                        <Label htmlFor="prod-images">Imágenes</Label>
+                        <div className="flex items-center space-x-2 mb-2">
+                          <input
+                            ref={fileInputRef}
+                            id="prod-upload"
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            className="hidden"
+                            onChange={(e) => uploadImageFiles(e.target.files)}
+                          />
+                          <Button
+                            variant="outline"
+                            onClick={() => fileInputRef.current?.click()}
+                            disabled={uploadingImages}
+                          >
+                            {uploadingImages ? "Subiendo..." : "Subir desde PC"}
+                          </Button>
+                          <span className="text-sm text-muted-foreground">o pega URLs separadas por coma abajo</span>
+                        </div>
                         <Input
                           id="prod-images"
                           value={productForm.images}
                           onChange={(e) => setProductForm({ ...productForm, images: e.target.value })}
                           placeholder="https://ejemplo.com/imagen1.jpg, https://ejemplo.com/imagen2.jpg"
                         />
+                        {productForm.images && (
+                          <div className="flex gap-2 mt-2 overflow-x-auto">
+                            {productForm.images.split(",").map((s) => s.trim()).filter(Boolean).map((url, i) => (
+                              <img key={i} src={url} alt={`imagen-${i}`} className="h-16 w-16 object-cover rounded" />
+                            ))}
+                          </div>
+                        )}
                       </div>
                       <div className="col-span-2 space-y-2">
                         <Label htmlFor="prod-desc">Descripción</Label>
